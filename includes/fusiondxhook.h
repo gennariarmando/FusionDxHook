@@ -116,14 +116,14 @@ private:
         ~HookWindow()
         {
             DestroyWindow(window);
-            UnregisterClass(windowClass.lpszClassName, windowClass.hInstance);
+            UnregisterClassW(windowClass.lpszClassName, windowClass.hInstance);
         }
         static HWND GetHookWindow(HookWindow& hw)
         {
             return hw.window;
         }
     private:
-        WNDCLASSEX windowClass{};
+        WNDCLASSEXW windowClass{};
         HWND window{};
     };
 
@@ -1263,7 +1263,7 @@ private:
             act.dwFlags = ACTCTX_FLAG_RESOURCE_NAME_VALID | ACTCTX_FLAG_HMODULE_VALID;
             act.lpSource = FullDllPath;
             act.hModule = DllBase;
-            act.lpResourceName = ISOLATIONAWARE_MANIFEST_RESOURCE_ID;
+            act.lpResourceName = MAKEINTRESOURCEW(2);
             *ActivationContext = 0;
             actx = CreateActCtxW(&act);
             if (actx == INVALID_HANDLE_VALUE)
